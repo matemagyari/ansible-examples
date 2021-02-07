@@ -1,0 +1,24 @@
+- hosts: localhost
+  gather_facts: false
+
+  # roles run after pre-task
+  roles:
+    - common
+
+  pre_tasks:
+    - set_fact:
+        events: ["pretask1"]
+
+  tasks:
+    - set_fact:
+        events: "{{ events + ['task1'] }}"
+
+  # handlers run between tasks and post_tasks
+
+  post_tasks:
+    - set_fact:
+        events: "{{ events + ['posttask1'] }}"
+    - name: print event
+      debug:
+        msg: "Events: {{ events }}"
+

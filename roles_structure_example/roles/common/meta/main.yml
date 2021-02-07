@@ -1,0 +1,6 @@
+# metadata for the role, including role dependencies.
+# any role dependencies listed here will be added to the list of roles
+
+dependencies:
+  - role: init
+    param1: "param 1"

@@ -1,0 +1,5 @@
+- set_fact:
+    new_events: ["InitRole", "{{ first_name }} {{ last_name }}", param1]
+
+- set_fact:
+    events: "{{ events + new_events }}"

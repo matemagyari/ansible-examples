@@ -1,0 +1,10 @@
+# Handlers, which may be used within or outside this role.
+# Handlers listed here will be added to the play.
+
+- name: Handler 1
+  set_fact:
+    events: "{{ events + ['Handler1'] }}"
+
+- name: Handler 2
+  debug:
+    msg: "Events: {{ events }}"

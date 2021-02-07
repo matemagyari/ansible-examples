@@ -1,0 +1,16 @@
+# the main list of tasks that the role executes
+#- name: Ansible apt install nginx
+#  apt: pkg=nginx state=present update_cache=true
+##  apt:
+##    name: nginx
+##    state: present
+#- name: Start nginx
+#  service:
+#    name: nginx
+#    state: started
+
+- name: list files
+  shell: ls -la
+  register: filelist
+- debug:
+    msg: "filelist: {{ filelist }}"

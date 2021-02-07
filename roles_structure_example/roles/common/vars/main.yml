@@ -1,0 +1,4 @@
+# other variables for the role (see Using Variables for more information).
+
+# Vars for dependent roles are specified in main role's vars files
+first_name: "Jack"

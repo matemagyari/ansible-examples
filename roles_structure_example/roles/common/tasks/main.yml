@@ -1,0 +1,34 @@
+# The main list of tasks that the role executes.
+# Handlers listed here will be added to the play.
+
+# Handler: a task to run only when a change is made on a machine.
+
+- name: First task in role
+  set_fact:
+    events: "{{ events + ['roletask1'] }}"
+  notify:
+    - Handler 1 # the task here doesn't change the state, so handler 1 won't be invoked
+
+- name: Use a module
+  custom_concat:
+    str1: "role lib"
+    str2: "task"
+  register: result
+
+- name: Append module output to events
+  set_fact:
+    events: "{{ events + [result.meta] }}"
+
+
+# do something that changes the state of the host so handlers will be invoked
+- name: Touch a file
+  ansible.builtin.file:
+    path: /tmp/foo.conf
+    state: touch
+- name: Remove file (delete file)
+  ansible.builtin.file:
+    path: /tmp/foo.conf
+    state: absent
+  notify:
+    - Handler 1
+    - Handler 2

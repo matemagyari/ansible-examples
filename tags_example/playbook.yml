@@ -1,0 +1,35 @@
+# Tags can be applied to plays, blocks, roles, tasks, imports
+
+- hosts: localhost
+  gather_facts: false
+#  tags: # applied to play. Everything tagged with "common" will be run
+#    - common
+
+  pre_tasks:
+    - set_fact:
+        events: []
+      tags: always # always run this regardless of specified tags
+
+  tasks:
+    - set_fact: # no tags, it will not run if there are tags specified
+        events: "{{ events + ['invalid_event'] }}"
+    - set_fact:
+        events: "{{ events + ['common_event'] }}"
+      tags: common # applied to task
+    - set_fact:
+        events: "{{ events + ['db_op1'] }}"
+      tags: # applied to task
+        - database
+    - block:
+      - set_fact:
+          events: "{{ events + ['block_op-1'] }}"
+      - set_fact:
+          events: "{{ events + ['block_op-2'] }}"
+      # applied to block
+      tags: ["webserver"]
+
+  post_tasks:
+    - name: print events
+      debug:
+        msg: "events: {{ events }}"
+      tags: always

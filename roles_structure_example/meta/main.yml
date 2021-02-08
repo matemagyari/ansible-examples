@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Mate Magyari
+  description: Some desc
+  company: Home
+
+  license: None
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: rhel
+      versions:
+        - 8
+    - name: ubuntu
+      versions:
+        - 20.04
+
+  galaxy_tags: []
+
+dependencies: []

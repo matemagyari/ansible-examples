@@ -1,0 +1,38 @@
+- hosts: localhost
+  gather_facts: false
+
+  #  You can use roles in three ways:
+  #   1. at the play level with the roles option: This is the classic way of using roles in a play.
+  #   2. at the tasks level with include_role: You can reuse roles dynamically anywhere in the tasks section of a play using include_role.
+  #   3. at the tasks level with import_role: You can reuse roles statically anywhere in the tasks section of a play using import_role.
+
+
+  # at the play level
+  roles:
+    - { role: eventappender, vars: { event: "play_level" } }
+
+  pre_tasks:
+    - set_fact:
+        events: []
+
+  tasks:
+    - set_fact:
+        events: "{{ events + ['task1'] }}"
+
+    # Ansible pre-processes all static imports during Playbook parsing time.
+    - name: Import the eventappender role statically
+      import_role:
+        name: eventappender
+      vars:
+        event: "task_level_static_import"
+    # Dynamic includes are processed during runtime at the point in which that task is encountered
+    - name: Import the eventappender role dynamically
+      include_role:
+        name: eventappender
+      vars:
+        event: "task_level_dynamic_import"
+    - set_fact:
+        events: "{{ events + ['task2'] }}"
+    - name: print event
+      debug:
+        msg: "Events: {{ events }}"

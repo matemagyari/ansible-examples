@@ -1,0 +1,15 @@
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Use a module
+      custom_concat:
+        str1: "role lib"
+        str2: "task"
+      register: result
+
+  post_tasks:
+    - name: print result
+      debug:
+        msg: "Result: {{ result }}"
+

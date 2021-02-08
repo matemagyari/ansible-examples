@@ -1,0 +1,1 @@
+Example for role folder structure and use.

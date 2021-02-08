@@ -1,0 +1,62 @@
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Init events
+      set_fact:
+        events: []
+    - name: Task that doesn't change the state
+      debug:
+        msg: "No change"
+      notify: Handler 1 # no notification triggered as there is no change
+
+    # do something that changes the state of the host so handlers will be invoked
+    - name: Touch a file
+      ansible.builtin.file:
+        path: /tmp/foo.conf
+        state: touch
+    - name: Remove file (delete file)
+      ansible.builtin.file:
+        path: /tmp/foo.conf
+        state: absent
+      notify:
+        - Handler 1
+        - Handler 2
+
+    # do something that changes the state of the host so handlers will be invoked
+    - name: Touch a file 2
+      ansible.builtin.file:
+        path: /tmp/foo.conf
+        state: touch
+    - name: Remove file (delete file) 2
+      ansible.builtin.file:
+        path: /tmp/foo.conf
+        state: absent
+      notify: "message topic"
+
+    - name: Add event
+      set_fact:
+        events: "{{ events }} + ['task']"
+
+  post_tasks:
+    - name: Post task add event
+      set_fact:
+        events: "{{ events }} + ['posttask']"
+    - name: print events
+      debug:
+        msg: "events: {{ events }}"
+
+
+  handlers:
+    - name: Handler 1
+      set_fact:
+        events: "{{ events + ['handler1'] }}"
+
+    - name: Handler 2
+      set_fact:
+        events: "{{ events + ['handler2'] }}"
+
+    - name: Topic listener handler
+      set_fact:
+        events: "{{ events + ['topic_listener_handler'] }}"
+      listen: "message topic"

@@ -1,0 +1,18 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: ubuntu-latest-curl
+    image: ubuntu:latest
+#  - name: ubuntu-16.04-curl
+#    image: ubuntu:16.04
+provisioner:
+  name: ansible
+scenario:
+  ephemeral_directory: /tmp/molecule/curl/.molecule
+verifier:
+  name: ansible # if the tests are represented by the verify.yml
+  options:
+    v: 1

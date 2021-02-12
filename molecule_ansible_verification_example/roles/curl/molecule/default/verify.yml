@@ -1,0 +1,14 @@
+- name: Verify
+  hosts: all
+  vars:
+    expected_content: "curl: try 'curl --help' or 'curl --manual' for more information"
+  tasks:
+    - name: Execute curl
+      shell: curl
+      ignore_errors: true
+      register: stdout
+
+    - name: Ensure the response is the expected
+      assert:
+        that:
+          - stdout.stderr == expected_content

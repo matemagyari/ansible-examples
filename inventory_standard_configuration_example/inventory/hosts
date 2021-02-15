@@ -1,3 +1,6 @@
+[all:vars]
+purpose=test
+
 [webservers]
 webserver-instance-1
 webserver-instance-2

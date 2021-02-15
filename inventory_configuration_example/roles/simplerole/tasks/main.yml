@@ -1,3 +1,0 @@
-- name: Print hello
-  debug:
-    msg: "{{ inventory_hostname }}: DB: {{ db | default('none') }}, disk: {{ disk | default('none') }} \nload_balancer: {{ load_balancer | default('none') }} op_system: {{ op_system | default('none') }}"

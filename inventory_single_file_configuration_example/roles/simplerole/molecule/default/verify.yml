@@ -1,0 +1,43 @@
+- name: Verify host vars are set properly
+  hosts: all
+
+  tasks:
+
+    - name: variables defined under all:vars apply to all hosts
+      assert:
+        that:
+          - purpose == "test" # defined in hosts under [all:vars]
+
+    - name: Ensure the vars are set correctly on webserver-instance-1
+      assert:
+        that:
+          - db is undefined
+          - disk == "32GB" # coming from group_vars
+          - load_balancer == "nginx" # coming from group_vars
+      when: inventory_hostname == "webserver-instance-1"
+
+    - name: Ensure the vars are set correctly on webserver-instance-2
+      assert:
+        that:
+          - db is undefined
+          - disk == "32GB" # coming from group_vars
+          - load_balancer == "nginx" # coming from group_vars
+      when: inventory_hostname == "webserver-instance-2"
+
+    - name: Ensure the vars are set correctly on db-instance-1
+      assert:
+        that:
+          - load_balancer is undefined
+          - replica is undefined
+          - disk == "1TB" # coming from group_vars
+          - db == "oracle" # coming from group_vars
+      when: inventory_hostname == "db-instance-1"
+
+    - name: Ensure the vars are set correctly on db-instance-2
+      assert:
+        that:
+          - load_balancer is undefined
+          - disk == "1TB" # coming from group_vars
+          - db == "oracle" # coming from group_vars
+          - replica == "true" # coming from host_vars
+      when: inventory_hostname == "db-instance-2"

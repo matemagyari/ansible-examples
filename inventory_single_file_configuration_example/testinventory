@@ -1,0 +1,32 @@
+[all:vars]
+purpose=test
+
+# groups
+
+[webservers]
+webserver-instance-1
+webserver-instance-2
+
+[dbservers_region_a]
+db-instance-1
+
+[dbservers_region_b]
+db-instance-2
+
+[dbservers:children]
+dbservers_region_a
+dbservers_region_b
+
+
+# group vars
+
+[webservers:vars]
+load_balancer=nginx
+disk=32GB
+
+[dbservers:vars]
+db=oracle
+disk=1TB
+
+[dbservers_region_b:vars]
+replica=true

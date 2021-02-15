@@ -1,0 +1,2 @@
+load_balancer: nginx
+disk: 32GB

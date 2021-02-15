@@ -1,0 +1,7 @@
+[webservers]
+webserver-instance-1
+webserver-instance-2
+
+[dbservers]
+db-instance-1
+db-instance-2

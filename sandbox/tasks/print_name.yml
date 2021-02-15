@@ -1,0 +1,4 @@
+- name: Say hello
+  shell: >
+    echo "hello {{ name }} " > /tmp/hello.txt;
+    echo world > /tmp/world.txt

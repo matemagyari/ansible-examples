@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: db-instance-1
+    image: ubuntu:16.04
+  - name: db-instance-2
+    image: ubuntu:16.04
+  - name: webserver-instance-1
+    image: ubuntu:16.04
+  - name: webserver-instance-2
+    image: ubuntu:16.04
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      hosts: ../../../../inventory/hosts
+      group_vars: ../../../../inventory/group_vars/
+      host_vars: ../../../../inventory/host_vars/
+scenario:
+  ephemeral_directory: /tmp/molecule/inventory/.molecule
+verifier:
+  name: ansible
+  options:
+    v: 1

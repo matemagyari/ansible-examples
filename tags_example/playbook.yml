@@ -29,7 +29,8 @@
       tags: ["webserver"]
 
   post_tasks:
-    - name: print events
-      debug:
-        msg: "events: {{ events }}"
-      tags: always
+    - name: Verification
+      assert:
+        that:
+          - events == ["db_op1", "block_op-1", "block_op-2"]
+      tags: ["webserver", "database"]

@@ -42,10 +42,10 @@
     - name: Post task add event
       set_fact:
         events: "{{ events }} + ['posttask']"
-    - name: print events
-      debug:
-        msg: "events: {{ events }}"
-
+    - name: Verification
+      assert:
+        that:
+          - events == ["task", "handler1", "handler2", "topic_listener_handler", "posttask"]
 
   handlers:
     - name: Handler 1

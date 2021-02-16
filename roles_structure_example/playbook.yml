@@ -18,7 +18,9 @@
   post_tasks:
     - set_fact:
         events: "{{ events + ['posttask1'] }}"
-    - name: print event
-      debug:
-        msg: "Events: {{ events }}"
+    - name: Verification
+      assert:
+        that:
+          - events == ["pretask1", "InitRole", "Jack Biden", "param1", "roletask1", "role lib task", "task1", "Handler1", "posttask1"]
+        
 

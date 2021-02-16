@@ -1,0 +1,3 @@
+- name: Add event
+  set_fact:
+    events: "{{ events + [event] }}"

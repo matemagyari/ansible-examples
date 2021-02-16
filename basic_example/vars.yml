@@ -1,9 +1,0 @@
-aws_access_key: "mock_access_key"
-aws_secret_key: "mock_secret_key"
-aws_ec2_url: "http://localhost:4566"
-aws_region: "us-west-2"
-
-#          s3_force_path_style         = true
-#          skip_credentials_validation = true
-#          skip_metadata_api_check     = true
-#          skip_requesting_account_id  = true

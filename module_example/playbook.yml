@@ -9,7 +9,7 @@
       register: result
 
   post_tasks:
-    - name: print result
-      debug:
-        msg: "Result: {{ result }}"
-
+    - name: Verification
+      assert:
+        that:
+          - result.meta == "role lib task"

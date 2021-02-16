@@ -36,3 +36,9 @@
     - name: print event
       debug:
         msg: "Events: {{ events }}"
+
+  post_tasks:
+    - name: Verification
+      assert:
+        that:
+          - events == ["play_level", "task1", "task_level_static_import", "task_level_dynamic_import", "task2"]

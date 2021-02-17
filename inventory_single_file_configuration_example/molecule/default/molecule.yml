@@ -14,15 +14,8 @@ platforms:
     image: ubuntu:16.04
 provisioner:
   name: ansible
-#  inventory:
-#    file: ../../../../testinventory
   ansible_args:
-    - --inventory=../../../../testinventory
-#  inventory:
-#    links:
-#      hosts: ../../../../inventory/hosts
-#      group_vars: ../../../../inventory/group_vars/
-#      host_vars: ../../../../inventory/host_vars/
+    - --inventory=../../testinventory
 scenario:
   ephemeral_directory: /tmp/molecule/inventory/.molecule
 verifier:

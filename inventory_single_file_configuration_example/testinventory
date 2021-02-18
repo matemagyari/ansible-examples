@@ -1,3 +1,5 @@
+# Examples for hierarchical and orthogonal groups
+
 [all:vars]
 purpose=test
 
@@ -17,6 +19,16 @@ db-instance-2
 dbservers_region_a
 dbservers_region_b
 
+# cross-cutting groups
+
+[data_center_north]
+webserver-instance-1
+db-instance-1
+
+[data_center_south]
+webserver-instance-2
+db-instance-2
+
 
 # group vars
 
@@ -30,3 +42,9 @@ disk=1TB
 
 [dbservers_region_b:vars]
 replica=true
+
+[data_center_north:vars]
+data_center=north
+
+[data_center_south:vars]
+data_center=south

@@ -1,10 +1,15 @@
 # Ansible examples
 
-Examples demonstrating Ansible features. Each example aims to be as simple as possible to showcase one aspect of Ansible.
-Most of them do not require external hosts, simply can be verified using the local file system or memory.
-Where some kind of host is necessary, the example uses Molecule to spin up a Docker container.
+Examples demonstrating the main building blocks of Ansible, like roles, handlers, inventories, etc. 
+Each subfolder under the root aims to showcase one such building block in a form of actions and verification.
+The verifications are done by assertions at the end of the playbooks or by Molecule tests.
 
-## Features
+Most of the examples do not require external hosts and their target feature simply can be demonstrated using the local file system or memory.
+Where some kind of host is necessary, Molecule is used to spin up Docker containers.
+
+## Local requirements: Ansible and Docker installed
+
+## Main building blocks
 
 - [Handlers](handlers_example)
 - [Tags](tags_example)
@@ -15,4 +20,4 @@ Where some kind of host is necessary, the example uses Molecule to spin up a Doc
 - [Inventory - single file config](inventory_single_file_configuration_example)
 - [Inventory - standard config](inventory_standard_configuration_example)
 - [Molecule - Ansible verification](molecule_ansible_verification_example)
-- [Molecule - Testinfra](molecule_testinfra_example)
+- [Molecule - Testinfra verification](molecule_testinfra_example)
